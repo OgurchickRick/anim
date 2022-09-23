@@ -1,14 +1,15 @@
 import javax.swing.*;
+import java.awt.*;
 
-public class MyFrame extends Jframe{
-    JFrame frame = new JFrame("Окно");
+public class MyFrame extends JFrame{
+    MyPanel panel;
 
-        frame.add();
+    MyFrame(){
+        panel = new MyPanel();
 
-        frame.setPreferredSize(new Dimension(720, 720));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        frame.pack();
-
-        frame.setVisible(true);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.add(panel);
+        this.pack();
+        this.setVisible(true);
+    }
 }
