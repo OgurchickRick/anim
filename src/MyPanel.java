@@ -10,8 +10,10 @@ public class MyPanel extends JPanel implements ActionListener {
     Timer timer;
     int x_v = 2;
     int y_v = 2;
-    int x = 0;
-    int y = 0;
+    int x = (int) ( Math.random() * 720 );
+    int y = (int) ( Math.random() * 720 );
+
+    Color color = new Color((int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ));
 
     MyPanel(){
         this.setPreferredSize(new Dimension(panel_width, panel_height));
@@ -24,20 +26,21 @@ public class MyPanel extends JPanel implements ActionListener {
         super.paint(g);
 
         Graphics2D g2D = (Graphics2D) g;
-        g2D.setColor(Color.red);
-        g2D.drawImage(image, x, y , null);
+        g2D.drawImage(image, x, y, color, null);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (x < panel_width-image.getWidth(null) && y == 0)
-            x += x_v;
-        if (x == panel_width-image.getWidth(null) && y < panel_height-image.getHeight(null))
-            y += y_v;
-        if (x > 0 && y == panel_height-image.getHeight(null))
-            x -= x_v;
-        if (x == 0 && y > 0)
-            y -= y_v;
+        if (x >= panel_width-image.getWidth(null) || x < 0){
+            x_v *= -1;
+            color = new Color((int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ));
+        }
+        if (y >= panel_height-image.getHeight(null) || y < 0){
+            y_v *= -1;
+            color = new Color((int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ));
+        }
+        x += x_v;
+        y += y_v;
         repaint();
     }
 }
