@@ -1,46 +1,69 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.Objects;
 
-public class MyPanel extends JPanel implements ActionListener {
-    final int panel_width = 720;
-    final int panel_height = 720;
-    Image image;
+public class MyPanel extends JPanel implements KeyListener, ActionListener {
+    private int x = 0;
+    private int y = 0;
+    private int w = 50;
+    private int h = 50;
+
     Timer timer;
-    int x_v = 2;
-    int y_v = 2;
-    int x = (int) ( Math.random() * 720 );
-    int y = (int) ( Math.random() * 720 );
 
-    Color color = new Color((int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ));
+    final int panel_width = 800;
+    final int panel_height = 600;
+    Rectangle rectangle = new Rectangle(x, y, w, h);
 
-    MyPanel(){
+    MyPanel() throws IOException {
         this.setPreferredSize(new Dimension(panel_width, panel_height));
-        image = new ImageIcon("C:\\Folders\\Учебка\\Java\\anim\\src\\logo-dvd.png").getImage();
         timer = new Timer(10, this);
-        timer.start();
-    }
+        this.addKeyListener(this);
+        }
+
     public void paint(Graphics g){
 
         super.paint(g);
 
         Graphics2D g2D = (Graphics2D) g;
-        g2D.drawImage(image, x, y, color, null);
+        g2D.fill(rectangle);
+        timer.start();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        switch (e.getKeyCode()){
+            case KeyEvent.VK_RIGHT:
+                rectangle.setLocation(rectangle.x+50, rectangle.y);
+                break;
+            case KeyEvent.VK_LEFT:
+                rectangle.setLocation(rectangle.x-50, rectangle.y);
+                break;
+            case KeyEvent.VK_DOWN:
+                rectangle.setLocation(rectangle.x, rectangle.y+50);
+                break;
+            case KeyEvent.VK_UP:
+                rectangle.setLocation(rectangle.x, rectangle.y-50);
+                break;
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (x >= panel_width-image.getWidth(null) || x < 0){
-            x_v *= -1;
-            color = new Color((int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ));
-        }
-        if (y >= panel_height-image.getHeight(null) || y < 0){
-            y_v *= -1;
-            color = new Color((int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ), (int) ( Math.random() * 255 ));
-        }
-        x += x_v;
-        y += y_v;
         repaint();
     }
 }
