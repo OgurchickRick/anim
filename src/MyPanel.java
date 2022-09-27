@@ -64,6 +64,16 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (rectangle.x > panel_width-w){
+            rectangle.x = 0;
+        } else if (rectangle.x < 0) {
+            rectangle.x = panel_width-w;
+        }
+        if (rectangle.y > panel_height-h){
+            rectangle.y = 0;
+        } else if (rectangle.y < 0) {
+            rectangle.y = panel_height-h;
+        }
         repaint();
     }
 }
