@@ -41,11 +41,6 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()){
             case KeyEvent.VK_RIGHT:
                 rectangle.setLocation(rectangle.x+50, rectangle.y);
@@ -60,6 +55,11 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
                 rectangle.setLocation(rectangle.x, rectangle.y-50);
                 break;
         }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+
     }
 
     @Override
