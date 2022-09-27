@@ -12,6 +12,7 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
     private int y = 0;
     private int w = 50;
     private int h = 50;
+    private int v = 50;
 
     Timer timer;
 
@@ -41,25 +42,31 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+            v *= 2;
+        }
         switch (e.getKeyCode()){
             case KeyEvent.VK_RIGHT:
-                rectangle.setLocation(rectangle.x+50, rectangle.y);
+                rectangle.setLocation(rectangle.x+v, rectangle.y);
                 break;
             case KeyEvent.VK_LEFT:
-                rectangle.setLocation(rectangle.x-50, rectangle.y);
+                rectangle.setLocation(rectangle.x-v, rectangle.y);
                 break;
             case KeyEvent.VK_DOWN:
-                rectangle.setLocation(rectangle.x, rectangle.y+50);
+                rectangle.setLocation(rectangle.x, rectangle.y+v);
                 break;
             case KeyEvent.VK_UP:
-                rectangle.setLocation(rectangle.x, rectangle.y-50);
+                rectangle.setLocation(rectangle.x, rectangle.y-v);
                 break;
         }
     }
 
+
     @Override
     public void keyReleased(KeyEvent e) {
-
+        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
+            v = 50;
+        }
     }
 
     @Override
