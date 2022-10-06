@@ -42,12 +42,25 @@ public class MyPanel extends JPanel implements MouseListener, ActionListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Point pos = getMousePosition();
-        x = (int)pos.getX();
-        y = (int)pos.getY();
-        Rectangle rectangle = new Rectangle((int)pos.getX(), (int)pos.getY(), w, h);
-        list.add(rectangle);
-        repaint();
+        if (e.getButton() == 1){
+            Point pos = getMousePosition();
+            x = (int)pos.getX();
+            y = (int)pos.getY();
+            Rectangle rectangle = new Rectangle((int)pos.getX(), (int)pos.getY(), w, h);
+            list.add(rectangle);
+            repaint();}
+        else if (e.getButton() == 3){
+            Point pos = getMousePosition();
+            x = (int)pos.getX();
+            y = (int)pos.getY();
+            for (Rectangle rec:list){
+                if ((x >= rec.x && x <= rec.x + w) && (y >= rec.y && y <= rec.y + h)){
+                    list.remove(rec);
+                    repaint();
+                }
+            }
+
+        }
     }
 
     @Override
