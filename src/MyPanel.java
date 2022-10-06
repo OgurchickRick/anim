@@ -5,25 +5,24 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class MyPanel extends JPanel implements KeyListener, ActionListener {
+public class MyPanel extends JPanel implements MouseListener, ActionListener {
     private int x = 0;
     private int y = 0;
     private int w = 50;
     private int h = 50;
-    private int v = 50;
 
-    Timer timer;
+    ArrayList <Rectangle> list = new ArrayList <Rectangle>();
+
 
     final int panel_width = 800;
     final int panel_height = 600;
-    Rectangle rectangle = new Rectangle(x, y, w, h);
 
     MyPanel() throws IOException {
         this.setPreferredSize(new Dimension(panel_width, panel_height));
-        timer = new Timer(10, this);
-        this.addKeyListener(this);
+        this.addMouseListener(this);
         }
 
     public void paint(Graphics g){
@@ -31,56 +30,43 @@ public class MyPanel extends JPanel implements KeyListener, ActionListener {
         super.paint(g);
 
         Graphics2D g2D = (Graphics2D) g;
-        g2D.fill(rectangle);
-        timer.start();
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-            v *= 2;
-        }
-        switch (e.getKeyCode()){
-            case KeyEvent.VK_RIGHT:
-                rectangle.setLocation(rectangle.x+v, rectangle.y);
-                break;
-            case KeyEvent.VK_LEFT:
-                rectangle.setLocation(rectangle.x-v, rectangle.y);
-                break;
-            case KeyEvent.VK_DOWN:
-                rectangle.setLocation(rectangle.x, rectangle.y+v);
-                break;
-            case KeyEvent.VK_UP:
-                rectangle.setLocation(rectangle.x, rectangle.y-v);
-                break;
-        }
-    }
-
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_SHIFT) {
-            v = 50;
+        for (Rectangle rec:list){
+            g2D.fill(rec);
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (rectangle.x > panel_width-w){
-            rectangle.x = 0;
-        } else if (rectangle.x < 0) {
-            rectangle.x = panel_width-w;
-        }
-        if (rectangle.y > panel_height-h){
-            rectangle.y = 0;
-        } else if (rectangle.y < 0) {
-            rectangle.y = panel_height-h;
-        }
         repaint();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        Point pos = getMousePosition();
+        x = (int)pos.getX();
+        y = (int)pos.getY();
+        Rectangle rectangle = new Rectangle((int)pos.getX(), (int)pos.getY(), w, h);
+        list.add(rectangle);
+        repaint();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }

@@ -13,6 +13,6 @@ public class MyFrame extends JFrame{
         this.add(panel);
         this.pack();
         this.setVisible(true);
-        this.addKeyListener(panel);
+        this.addMouseListener(panel);
     }
 }
