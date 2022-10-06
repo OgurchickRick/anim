@@ -1,20 +1,18 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class MyPanel extends JPanel implements MouseListener, ActionListener {
+public class MyPanel extends JPanel implements MouseListener, ActionListener, MouseMotionListener {
     private int x = 0;
     private int y = 0;
     private int w = 50;
     private int h = 50;
 
     ArrayList <Rectangle> list = new ArrayList <Rectangle>();
+
+    Cursor cursor = new Cursor(Cursor.CROSSHAIR_CURSOR);
 
 
     final int panel_width = 800;
@@ -23,7 +21,9 @@ public class MyPanel extends JPanel implements MouseListener, ActionListener {
     MyPanel() throws IOException {
         this.setPreferredSize(new Dimension(panel_width, panel_height));
         this.addMouseListener(this);
-        }
+        this.addMouseMotionListener(this);
+        this.setCursor(cursor);
+    }
 
     public void paint(Graphics g){
 
@@ -80,6 +80,17 @@ public class MyPanel extends JPanel implements MouseListener, ActionListener {
 
     @Override
     public void mouseExited(MouseEvent e) {
+
+    }
+
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
 
     }
 }
