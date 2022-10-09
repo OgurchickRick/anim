@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f52d0ef1-fc50-400e-ac1c-4cc5ac6884b8" name="Changes" comment="Удаляет">
+    <list default="true" id="f52d0ef1-fc50-400e-ac1c-4cc5ac6884b8" name="Changes" comment="Меняется">
+      <change afterPath="$PROJECT_DIR$/src/MyDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyFrame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyPanel.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -135,7 +137,14 @@
       <option name="project" value="LOCAL" />
       <updated>1665086747038</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Меняется">
+      <created>1665088074898</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1665088074898</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -158,7 +167,8 @@
     <MESSAGE value="Бегает" />
     <MESSAGE value="Спавнит" />
     <MESSAGE value="Удаляет" />
-    <option name="LAST_COMMIT_MESSAGE" value="Удаляет" />
+    <MESSAGE value="Меняется" />
+    <option name="LAST_COMMIT_MESSAGE" value="Меняется" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

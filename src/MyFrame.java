@@ -12,7 +12,8 @@ public class MyFrame extends JFrame{
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.add(panel);
         this.pack();
+        this.setLocation(700, 400);
         this.setVisible(true);
-        this.addMouseListener(panel);
+        this.addKeyListener(panel);
     }
 }
