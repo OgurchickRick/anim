@@ -3,9 +3,12 @@ import java.io.IOException;
 
 public class MyDialog {
 
+    String name;
+
     MyFrame f;
     MyDialog() throws IOException {
         f = new MyFrame();
-        JOptionPane.showMessageDialog(f, "Тёмка Дербин");
+        name = JOptionPane.showInputDialog(f, "Введите ваше имя");
+        JOptionPane.showMessageDialog(f, name);
     }
 }
