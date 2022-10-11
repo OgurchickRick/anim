@@ -2,37 +2,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.ArrayList;
 
-public class MyPanel extends JPanel implements KeyListener{
+public class MyPanel extends JPanel {
 
-    MyDialog dialog;
-    final int panel_width = 0;
-    final int panel_height = 0;
+    String otwet;
 
-    MyPanel() throws IOException {
-        this.setPreferredSize(new Dimension(panel_width, panel_height));
-        this.addKeyListener(this);
+    String[] var = {"800x600", "1024x768", "1920x1080"};
+
+    MyPanel(){
+        otwet = (String)JOptionPane.showInputDialog(null, "Выберите разрешение", "Выбор разрешения", JOptionPane.QUESTION_MESSAGE, null, var, var[0]);
+        this.setPreferredSize(new Dimension(Integer.parseInt(otwet.split("x")[0]), Integer.parseInt(otwet.split("x")[1])));
     }
 
-    @Override
-    public void keyTyped(KeyEvent e) {
 
-    }
-
-    @Override
-    public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_SPACE){
-            try {
-                dialog = new MyDialog();
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-        }
-    }
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-
-    }
 }

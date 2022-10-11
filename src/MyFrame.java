@@ -14,6 +14,5 @@ public class MyFrame extends JFrame{
         this.pack();
         this.setLocation(700, 400);
         this.setVisible(true);
-        this.addKeyListener(panel);
     }
 }
