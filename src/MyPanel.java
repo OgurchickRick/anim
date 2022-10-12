@@ -2,35 +2,29 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MyPanel extends JPanel{
 
-    Font font;
-    JLabel label;
-    JSlider slider;
+    int count;
 
-    String FontFam = "Verdana";
-    int i = Font.ITALIC;
+    JLabel label;
+
+    JButton but;
 
     MyPanel() {
         this.setPreferredSize(new Dimension(1000, 500));
-        slider = new JSlider(5, 100, 50);
-        slider.setPaintLabels(true);
-        slider.setMajorTickSpacing(10);
-        label = new JLabel("Моя первая надпись!");
-        font = new Font(FontFam, i, slider.getValue());
-        label.setHorizontalAlignment(JLabel.CENTER);
-        label.setVerticalAlignment(JLabel.CENTER);
-        label.setFont(font);
-        slider.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                // меняем надпись
-                int value = ((JSlider)e.getSource()).getValue();
-                font = new Font(FontFam, i, value);
-                label.setFont(font);
+        label = new JLabel(String.valueOf(count));
+        but = new JButton("Press");
+        but.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                count++;
+                label.setText(String.valueOf(count));
             }
         });
-        this.add(slider);
         this.add(label);
+        this.add(but);
     }
 }
