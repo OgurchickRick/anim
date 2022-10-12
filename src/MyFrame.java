@@ -6,68 +6,25 @@ public class MyFrame extends JFrame{
     String login = " ";
     String password1;
     String password2;
+    Font font = new Font("Verdana", Font.ITALIC, 50);
+    JLabel label;
+
+
 
     MyFrame() {
         panel = new MyPanel();
-
+        label = new JLabel("Моя первая надпись!");
+        label.setFont(font);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setVerticalAlignment(JLabel.CENTER);
         this.setTitle("Game");
-        this.add(panel);
+        this.add(label);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setPreferredSize(new Dimension(500, 300));
+        this.setPreferredSize(new Dimension(1000, 500));
         this.pack();
 
-        this.setLocation(600, 300);
+        this.setLocation(100, 50);
         this.setVisible(true);
 
-        int otw = JOptionPane.showConfirmDialog(null, "Хотитете зарегистрироваться?");
-        System.out.println(otw);
-        if (otw == 0){
-            while (true){
-                login = JOptionPane.showInputDialog(null, "Введите логин", "Username");
-                if (login == null){
-                    this.dispose();
-                    break;
-                }
-                if (login.length() > 5 && !login.contains(" ")){
-                    break;
-                }
-            }
-            while (true){
-                password1 = JOptionPane.showInputDialog(null, "Введите пароль");
-                if (password1 == null){
-                    this.dispose();
-                    break;
-                }
-                if (password1.toString().length() > 8){
-                    char[] mas = password1.toString().toCharArray();
-                    boolean isD = false;
-                    boolean isC = false;
-                    for (char c:mas){
-                        if (Character.isDigit(c)){
-                            isD = true;
-                        }
-                        if (Character.isAlphabetic(c)){
-                            isC = true;
-                        }
-                    }
-                    if (isC && isD){
-                        break;
-                    }
-                }
-            }
-            while (true){
-                password2 = JOptionPane.showInputDialog(null, "Подтвердите пароль");
-                if (password2 == null){
-                    this.dispose();
-                    break;
-                }
-                if (password1.equals(password2)){
-                    break;
-                }
-            }
-            JOptionPane.showMessageDialog(null, "Добро пожаловать " + login);
-        }else {
-            this.dispose();
-        }
     }
 }
