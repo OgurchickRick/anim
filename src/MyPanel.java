@@ -7,48 +7,30 @@ public class MyPanel extends JPanel{
 
     String value;
 
-    JLabel label;
-
     JButton but;
-    JRadioButton rb1, rb2, rb3, rb4;
+
+    JTextField input;
+
+    JTextArea res;
+
 
     MyPanel() {
-        this.setPreferredSize(new Dimension(100, 300));
-        label = new JLabel("Ответ: ");
-        but = new JButton("Ответить");
-        rb1 = new JRadioButton("Весна");
-        rb2 = new JRadioButton("Лето");
-        rb3 = new JRadioButton("Осень");
-        rb4 = new JRadioButton("Зима");
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(rb1);
-        bg.add(rb2);
-        bg.add(rb3);
-        bg.add(rb4);
-        bg.add(but);
-
-
+        this.setPreferredSize(new Dimension(600, 300));
+        but = new JButton("Записать");
+        input = new JTextField(50);
+        res = new JTextArea(20, 50);
+        res.setFont(new Font("Verdana", Font.BOLD, 10));
+        res.setEnabled(false);
 
         but.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (rb1.isSelected()){
-                    value = rb1.getText();
-                }else if (rb2.isSelected()){
-                    value = rb2.getText();
-                }else if (rb3.isSelected()){
-                    value = rb3.getText();
-                }else if (rb4.isSelected()){
-                    value = rb4.getText();
-                }
-                label.setText("Ответ: " + value);
+                value = input.getText();
+                res.setText(res.getText() + "\n" + value);
             }
         });
-        this.add(rb1);
-        this.add(rb2);
-        this.add(rb3);
-        this.add(rb4);
+        this.add(input);
         this.add(but);
-        this.add(label);
+        this.add(res);
     }
 }
