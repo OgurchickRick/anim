@@ -6,7 +6,7 @@ public class MyFrame extends JFrame{
 
     MyFrame() {
         panel = new MyPanel();
-        this.setTitle("Game");
+        this.setTitle("Калькулятор");
         this.add(panel);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
