@@ -2,17 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MyFrame extends JFrame{
-    MyPanel panel;
+    MyForm form;
 
     MyFrame() {
-        panel = new MyPanel();
+        form = new MyForm();
         this.setTitle("Калькулятор");
-        this.add(panel);
+        this.add(form);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-
         this.pack();
 
-        this.setLocation(100, 50);
+        this.setLocation(400, 100);
         this.setVisible(true);
 
     }
