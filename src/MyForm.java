@@ -1,65 +1,137 @@
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 
-public class MyForm extends JFrame implements ActionListener{
-    private JLabel title;
-    private JTextField surnameInput;
-    private JLabel surname;
-    private JRadioButton RadioButton1;
-    private JRadioButton RadioButton2;
-    private JLabel gender;
-    private JSpinner spinner1;
-    private JLabel age;
-    private JPanel pane1;
-    private JTextArea textArea;
-    private JLabel comment;
-    private JSlider slider1;
-    private JLabel growth;
-    private JButton submit;
-    private JLabel lastname;
+public class MyForm extends JFrame{
+    private JButton open;
+    private JLabel openFile;
+    private JPanel frame1;
+    private JButton save;
+    private JButton saveHow;
+    JTextArea input;
+    private JScrollBar scrollBar1;
 
-    private JLabel name;
-    private JTextField growthInput;
-    private JTextField nameInput;
-    private JTextField lastnameInput;
-
+    static File file;
+    JFileChooser fileChooser;
 
     MyForm(){
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setContentPane(pane1);
+        setContentPane(frame1);
         setVisible(true);
-        growthInput.setEnabled(false);
-        slider1.addChangeListener(new ChangeListener() {
-            @Override
-            public void stateChanged(ChangeEvent e) {
-                growthInput.setText(String.valueOf(slider1.getValue()));
+        fileChooser = new JFileChooser();
+        file = new File("C:\\Рабочий стол\\Новый текстовый файл.txt");
+        openFile.setText("Открыт файл: " + file.getName());
+
+        open.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                fileChooser.setDialogTitle("Выбор директории");
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                int result = fileChooser.showOpenDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION ){
+                    file = fileChooser.getSelectedFile();
+                    openFile.setText("Открыт файл: " + file.getName());
+                    StringBuilder sb = new StringBuilder();
+                    BufferedReader in;
+                    {
+                        try {
+                            in = new BufferedReader(new FileReader( file.getAbsoluteFile()));
+                        } catch (FileNotFoundException ev) {
+                            throw new RuntimeException(ev);
+                        }
+                        try {
+                            String s;
+                            while ((s = in.readLine()) != null) {
+                                sb.append(s);
+                                sb.append("\n");
+                            }
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        } finally {
+                            try {
+                                in.close();
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                        input.setText(String.valueOf(sb));
+                    }
+                }
+
             }
         });
 
-        ButtonGroup bg = new ButtonGroup();
-        bg.add(RadioButton1);
-        bg.add(RadioButton2);
+        saveHow.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                fileChooser.setDialogTitle("Выбор директории");
+                fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                int result = fileChooser.showOpenDialog(null);
+                if (result == JFileChooser.APPROVE_OPTION ){
+                    file = fileChooser.getSelectedFile();
+                    openFile.setText("Открыт файл: " + file.getName());
+                    try {
+                        if (!file.exists()){
+                            file.createNewFile();
+                        } else {
+                            file.delete();
+                        }
+                        PrintWriter out = new PrintWriter(file.getAbsoluteFile());
+                        try {
+                            out.print(input.getText());
+                        } finally {
+                            out.close();
+                        }
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            }
+        });
 
-        submit.addActionListener(new ActionListener() {
+        save.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "ФИО: " + surnameInput.getText() + " " +
-                        nameInput.getText() + " " + lastnameInput.getText() + "\n" +
-                        "Пол: " + ((RadioButton1.isSelected())?"Мужской":"Женский") + "\n" +
-                        "О себе: " + textArea.getText() + "\n" +
-                        "Возраст: " + spinner1.getValue() + "\n" +
-                        "Рост: " + slider1.getValue() + "\n");
-                System.exit(0);
+                openFile.setText("Открыт файл: " + file.getName());
+                try {
+                    if (!file.exists()){
+                        fileChooser.setDialogTitle("Выбор директории");
+                        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                        int result = fileChooser.showOpenDialog(null);
+                        if (result == JFileChooser.APPROVE_OPTION ){
+                            file = fileChooser.getSelectedFile();
+                            openFile.setText("Открыт файл: " + file.getName());
+                            try {
+                                if (!file.exists()){
+                                    file.createNewFile();
+                                } else {
+                                    file.delete();
+                                }
+                                PrintWriter out = new PrintWriter(file.getAbsoluteFile());
+                                try {
+                                    out.print(input.getText());
+                                } finally {
+                                    out.close();
+                                }
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    } else {
+                        file.delete();
+                    }
+                    PrintWriter out = new PrintWriter(file.getAbsoluteFile());
+                    try {
+                        out.print(input.getText());
+                    } finally {
+                        out.close();
+                    }
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }
